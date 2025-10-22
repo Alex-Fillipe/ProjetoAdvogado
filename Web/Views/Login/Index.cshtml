@@ -1,0 +1,33 @@
+﻿@model ViewModel.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensagem"]</div>
+}
+
+@using (Html.BeginForm("Index", "Login", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Usuario)
+        @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", placeholder = "Digite seu usuário" })
+        @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Senha)
+        @Html.PasswordFor(m => m.Senha, new { @class = "form-control", placeholder = "Digite sua senha" })
+        @Html.ValidationMessageFor(m => m.Senha, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Entrar</button>
+
+    <p>Não tem conta? @Html.ActionLink("Cadastre-se aqui", "Register", "Login")</p>
+}

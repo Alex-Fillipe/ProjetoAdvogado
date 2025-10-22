@@ -1,0 +1,116 @@
+﻿@using ViewModel
+@model AdvogadoViewModel
+
+@{
+    ViewBag.Title = "Editar Advogado";
+}
+
+<h2>Editar Advogado</h2>
+
+@using (Html.BeginForm("Edit", "Advogado", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Senioridade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Senioridade,
+                    new SelectList(Enum.GetValues(typeof(Dominio.Enums.SenioridadeEnum))),
+                    "-- Selecione --",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Senioridade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <h4>Endereço</h4>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CEP, new { @class = "form-control", @id = "cep" , @placeholder = "00000-000", @maxlength = "9" })
+                @Html.ValidationMessageFor(model => model.CEP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Logradouro, htmlAttributes: new { @class = "control-label col-md-2"  })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Logradouro, new { @class = "form-control", @id = "logradouro" })
+                @Html.ValidationMessageFor(model => model.Logradouro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Bairro, new { @class = "form-control", @id = "bairro" })
+                @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Estado,
+                    new SelectList(Enum.GetValues(typeof(Dominio.Enums.EstadoEnum))),
+                    "-- Selecione o Estado --",
+                    new { @class = "form-control", @id = "estado" })
+                @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger", @id = "estado" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Numero, new { @class = "form-control", type = "number", min = "1" })
+                @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Complemento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Complemento, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar Alterações" class="btn btn-success" />
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="~/Scripts/app/Advogado/Advogado.cshtml.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            Advogado_AoCarregarComponente();
+        });
+    </script>
+}

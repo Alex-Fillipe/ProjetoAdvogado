@@ -1,0 +1,111 @@
+﻿@using ViewModel
+@model AdvogadoViewModel
+
+@{
+    ViewBag.Title = "Cadastrar Advogado";
+}
+
+<h2>Cadastrar Advogado</h2>
+
+@using (Html.BeginForm("Create", "Advogado", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal" id="formAdvogado">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Senioridade, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Senioridade,
+                new SelectList(Enum.GetValues(typeof(Dominio.Enums.SenioridadeEnum))),
+                "-- Selecione --",
+                new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Senioridade)
+        </div>
+    </div>
+
+    <hr />
+    <h4>Endereço</h4>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CEP, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.CEP, new { @class = "form-control", @id = "cep" })
+            @Html.ValidationMessageFor(model => model.CEP)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Logradouro, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Logradouro, new { @class = "form-control", @id = "logradouro" })
+            @Html.ValidationMessageFor(model => model.Logradouro)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Bairro, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Bairro, new { @class = "form-control", @id = "bairro" })
+            @Html.ValidationMessageFor(model => model.Bairro)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Estado, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Estado,
+                new SelectList(Enum.GetValues(typeof(Dominio.Enums.EstadoEnum))),
+                "-- Selecione o Estado --",
+                new { @class = "form-control", @id = "estado" })
+            @Html.ValidationMessageFor(model => model.Estado)
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Numero, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Numero, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(model => model.Numero)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Complemento, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Complemento, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Complemento)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Salvar" class="btn btn-success" />
+            <a href="@Url.Action("Index", "Advogado")" class="btn btn-secondary">Voltar</a>
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+     <script src="~/Scripts/app/Advogado/Advogado.cshtml.js"></script>
+
+    
+     <script>
+         $(document).ready(function () {
+             Advogado_AoCarregarComponente();
+         });
+     </script>
+}

@@ -1,0 +1,57 @@
+﻿@using ViewModel
+@model List<AdvogadoViewModel>
+
+@{
+    ViewBag.Title = "Lista de Advogados";
+}
+
+<h2>Lista de Advogados</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Advogado")" class="btn btn-primary">Adicionar Novo Advogado</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Senioridade</th>
+            <th>Logradouro</th>
+            <th>Bairro</th>
+            <th>Estado</th>
+            <th>CEP</th>
+            <th>Número</th>
+            <th>Complemento</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var adv in Model)
+            {
+                <tr>
+                    <td>@adv.Nome</td>
+                    <td>@adv.Senioridade</td>
+                    <td>@adv.Logradouro</td>
+                    <td>@adv.Bairro</td>
+                    <td>@adv.Estado</td>
+                    <td>@adv.CEP</td>
+                    <td>@adv.Numero</td>
+                    <td>@adv.Complemento</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Advogado", new { id = adv.Id })" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="@Url.Action("Delete", "Advogado", new { id = adv.Id })" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Tem certeza que deseja excluir este advogado?');">Excluir</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="9" class="text-center">Nenhum advogado cadastrado.</td>
+            </tr>
+        }
+    </tbody>
+</table>
